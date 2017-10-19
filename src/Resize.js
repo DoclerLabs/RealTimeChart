@@ -2,15 +2,18 @@ class Resize {
   constructor(Canvas) {
     this.Canvas = Canvas;
     if (this.Canvas.options.isResponsive) {
+      this.windowResizeListener = this.windowResizeListener.bind(this);
       this.setListener();
       this.setSize();
     }
   }
 
   setListener() {
-    window.addEventListener('resize', () => {
-      this.setSize();
-    });
+    window.addEventListener('resize', this.windowResizeListener);
+  }
+
+  windowResizeListener() {
+    this.setSize();
   }
 
   setSize() {
@@ -19,6 +22,10 @@ class Resize {
     this.Canvas.calculateDefaults();
     this.Canvas.createPlugins();
     this.Canvas.render();
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.windowResizeListener);
   }
 }
 

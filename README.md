@@ -41,6 +41,12 @@ rtChart.addChartData([{id: 'uniqId1', value: 10}, {id: 'uniqId2', value: 20}, {i
 rtChart.render();
 ```
 
+##### Destroy
+
+```js
+rtChart.destroy();
+```
+
 ##### Options (public):
 * paddingBottom - extra padding from bottom
 ```js
@@ -125,10 +131,16 @@ More examples are in the examples folder.
 npm run build
 ```
 
+### Prettier src
+```bash
+npm run prettier
+```
+
 ### Missing
 * tests
 * other type of charts
 * more examples
+* commenting the code
 
 ### Contact
 - Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)

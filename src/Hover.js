@@ -1,29 +1,32 @@
 class Hover {
   constructor(Canvas) {
     this.Canvas = Canvas;
-    this.setListener();
     this.currentSegmentKey = -1;
     this.currentData = false;
     this.lastData = false;
     this.x = 0;
     this.y = 0;
+    this.mouseMoveListener = this.mouseMoveListener.bind(this);
+    this.mouseOutListener = this.mouseOutListener.bind(this);
+    this.setListener();
+  }
+  setListener() {
+    this.Canvas.element.addEventListener('mousemove', this.mouseMoveListener);
+    this.Canvas.element.addEventListener('mouseout', this.mouseOutListener);
   }
 
-  setListener() {
-    let self = this;
-    this.Canvas.element.onmousemove = function(e) {
-      const rect = this.getBoundingClientRect();
-      self.x = e.clientX - rect.left;
-      self.y = e.clientY - rect.top;
-      self.calculateSegmentKeyFromPosition();
-      self.calculateDataBySegmentKey();
-      self.callHoverCallback();
-    };
+  mouseMoveListener(ev) {
+    const rect = ev.target.getBoundingClientRect();
+    this.x = ev.clientX - rect.left;
+    this.y = ev.clientY - rect.top;
+    this.calculateSegmentKeyFromPosition();
+    this.calculateDataBySegmentKey();
+    this.callHoverCallback();
+  }
 
-    this.Canvas.element.onmouseout = function(e) {
-      self.currentData = false;
-      self.callHoverCallback();
-    };
+  mouseOutListener() {
+    this.currentData = false;
+    this.callHoverCallback();
   }
 
   calculateSegmentKeyFromPosition() {
@@ -50,6 +53,11 @@ class Hover {
         y: this.y,
       });
     }
+  }
+
+  destroy() {
+    this.Canvas.element.addEventListener('mousemove', this.mouseMoveListener);
+    this.Canvas.element.addEventListener('mouseout', this.mouseOutListener);
   }
 }
 export default Hover;

@@ -1,10 +1,11 @@
 {
   "name": "realtimechart",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "High performant chart for real time data.",
   "main": "Index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "prettify": "prettier --single-quote --trailing-comma es5 --write \"src/**/!(Lesshat).{less,js}\""
   },
   "keywords": [
     "chart",
@@ -25,6 +26,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "clean-webpack-plugin": "^0.1.17",
     "json-loader": "^0.5.7",
+    "prettier": "^1.7.4",
     "webpack": "^3.8.1"
   }
 }

@@ -98,10 +98,7 @@ class RealTimeChart {
   onLoad() {
     return new Promise(resolve => {
       if (this.options.waitWindowLoad) {
-        if (
-          document.readyState === 'complete' ||
-          document.readyState === 'interactive'
-        ) {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
           resolve();
         } else {
           window.addEventListener('load', () => {
@@ -193,6 +190,11 @@ class RealTimeChart {
     }
   }
 
+  destroy() {
+    this.Resize.destroy();
+    this.Hover.destroy();
+  }
+
   drawLine(values, segmentKey) {
     values.forEach((value, iterKey) => {
       this.Line.setOptions({
@@ -214,10 +216,7 @@ class RealTimeChart {
   }
 
   calculateDefaults() {
-    if (
-      this.options.hasOwnProperty('legend') === true &&
-      this.options.legend.length > 0
-    ) {
+    if (this.options.hasOwnProperty('legend') === true && this.options.legend.length > 0) {
       this.settings.paddingBottom = this.options.paddingBottom + 30;
     }
     if (this.options.showRuler === true) {
@@ -227,17 +226,10 @@ class RealTimeChart {
     this.settings.borderWidth = 2;
     this.settings.boxInnerPadding = 2;
     this.settings.stageWidth =
-      this.options.width -
-      this.settings.borderWidth -
-      this.settings.paddingRight -
-      this.settings.boxInnerPadding;
+      this.options.width - this.settings.borderWidth - this.settings.paddingRight - this.settings.boxInnerPadding;
     this.settings.stageHeight =
-      this.options.height -
-      this.settings.borderWidth -
-      this.settings.paddingBottom -
-      this.settings.boxInnerPadding;
-    this.settings.oneXSegment =
-      this.settings.stageWidth / this.options.totalElement;
+      this.options.height - this.settings.borderWidth - this.settings.paddingBottom - this.settings.boxInnerPadding;
+    this.settings.oneXSegment = this.settings.stageWidth / this.options.totalElement;
     this.settings.oneYSegment = this.settings.stageHeight / 100;
     this.settings.valueDiff = this.options.maxValue - this.options.minValue;
   }
@@ -256,11 +248,7 @@ class RealTimeChart {
 
   calculatePercent(num) {
     let correctValue = this.filterValue(num);
-    return (
-      Math.round(
-        (correctValue - this.options.minValue) / this.settings.valueDiff * 100
-      ) || 1
-    );
+    return Math.round((correctValue - this.options.minValue) / this.settings.valueDiff * 100) || 1;
   }
 
   transformChartDataToPercent(values) {
