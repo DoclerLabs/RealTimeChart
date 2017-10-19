@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+	<script src="../bundle/realtimechart-1.0.0.js" ></script>
+</head>
+<body>
+		<canvas id="canvas" height="300"></canvas>
+		<script>
+		var getRandomInt = function(min, max){
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		};
+		var rtChart = new RealTimeChart(document.getElementById('canvas'));
+		rtChart.setOptions({
+			waitWindowLoad: true,
+			type: 'line',
+			isResponsive: true,
+			totalElement: 100,
+			width: 400,
+			height: 300,
+			onHover: function(data) {
+				console.log('Data', data);
+			},
+			legend: [
+				{
+					id: 'line1',
+					title: 'Line 1',
+					color: '#ff7676',
+				},
+				{
+					id: 'line2',
+					title: 'Line 2',
+					color: '#2cabe3',
+				},
+				{
+					id: 'line3',
+					title: 'Line 3',
+					color: '#707cd2',
+				},
+			],
+			minValue: 0,
+			maxValue: 100,
+			paddingRight: 0,
+		});
+		
+		setInterval(function() {
+			rtChart.addChartData([{
+				id: 'line1',
+				value: getRandomInt(0, 20),
+			}, {
+				id: 'line2',
+				value: getRandomInt(20, 40),
+			}, {
+				id: 'line3',
+				value: getRandomInt(40, 60),
+			}]);
+			rtChart.render();
+		}, 1000/24)
+	  </script>
+</body>
+</html>
