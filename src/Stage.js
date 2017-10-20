@@ -23,6 +23,25 @@ class Stage {
     );
   }
 
+  nFormatter(num, digits) {
+    let si = [
+        { value: 1e18, symbol: 'E' },
+        { value: 1e15, symbol: 'P' },
+        { value: 1e12, symbol: 'T' },
+        { value: 1e9, symbol: 'G' },
+        { value: 1e6, symbol: 'M' },
+        { value: 1e3, symbol: 'k' },
+      ],
+      rx = /\.0+$|(\.[0-9]*[1-9])0+$/,
+      i;
+    for (i = 0; i < si.length; i++) {
+      if (num >= si[i].value) {
+        return (num / si[i].value).toFixed(digits).replace(rx, '$1') + si[i].symbol;
+      }
+    }
+    return num.toFixed(digits).replace(rx, '$1');
+  }
+
   printRuler() {
     let marginFromStage = 5;
     let fontSize = 10;
@@ -31,19 +50,28 @@ class Stage {
       this.Canvas.settings.paddingRight +
       this.Canvas.settings.borderWidth +
       marginFromStage;
-    let marginTopForTop = 2 + fontSize / 2;
+    let marginTopForTop = this.Canvas.settings.borderWidth + fontSize / 2;
     let marginTopForCenter =
       (this.Canvas.settings.stageHeight + this.Canvas.settings.boxInnerPadding + this.Canvas.settings.borderWidth) / 2;
     let marginTopForBottom = this.Canvas.options.height - this.Canvas.settings.paddingBottom;
+    this.Canvas.ctx.clearRect(
+      marginLeft,
+      this.Canvas.settings.borderWidth - fontSize / 2,
+      this.Canvas.settings.paddingRight,
+      this.Canvas.options.height - this.Canvas.settings.paddingBottom - this.Canvas.settings.borderWidth + fontSize / 2
+    );
     this.Canvas.ctx.fillStyle = this.Canvas.options.textColor;
     this.Canvas.ctx.font = fontSize + 'px Arial';
-    this.Canvas.ctx.fillText(this.Canvas.options.maxValue, marginLeft, marginTopForTop);
+    this.Canvas.ctx.fillText(this.nFormatter(this.Canvas.options.maxValue, 1), marginLeft, marginTopForTop);
     this.Canvas.ctx.fillText(
-      Math.round(this.Canvas.options.minValue + (this.Canvas.options.maxValue - this.Canvas.options.minValue) / 2),
+      this.nFormatter(
+        this.Canvas.options.minValue + (this.Canvas.options.maxValue - this.Canvas.options.minValue) / 2,
+        1
+      ),
       marginLeft,
       marginTopForCenter
     );
-    this.Canvas.ctx.fillText(this.Canvas.options.minValue, marginLeft, marginTopForBottom);
+    this.Canvas.ctx.fillText(this.nFormatter(this.Canvas.options.minValue, 1), marginLeft, marginTopForBottom);
   }
 
   drawFrame() {

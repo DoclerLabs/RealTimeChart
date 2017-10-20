@@ -124,6 +124,11 @@ waitWindowLoad: true, //Boolean
 isResponsive: false, //Boolean
 ```
 
+* calcMaxValue - calculate the max value according to the input, new max value is increased by 10%. (newMaxValue = inputValue + inputValue * 0.1)
+```js
+calcMaxValue: false, //Boolean
+```
+
 More examples are in the examples folder.
 
 ### Build
@@ -146,4 +151,4 @@ npm run prettier
 - Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)
 
 ### Version
-1.0.0
+1.2.0

@@ -59,6 +59,7 @@ class RealTimeChart {
       totalElement: 50,
       minValue: 250,
       maxValue: 500,
+      calcMaxValue: false,
       showRuler: true,
       showFrame: true,
       textColor: '#313131',
@@ -231,7 +232,7 @@ class RealTimeChart {
       this.options.height - this.settings.borderWidth - this.settings.paddingBottom - this.settings.boxInnerPadding;
     this.settings.oneXSegment = this.settings.stageWidth / this.options.totalElement;
     this.settings.oneYSegment = this.settings.stageHeight / 100;
-    this.settings.valueDiff = this.options.maxValue - this.options.minValue;
+    this.calculateValueDiff();
   }
 
   filterValue(value) {
@@ -240,15 +241,36 @@ class RealTimeChart {
     }
 
     if (value > this.options.maxValue) {
-      return this.options.maxValue;
+      if (this.options.calcMaxValue) {
+        this.options.maxValue = value + value * 0.1;
+        this.calculateValueDiff();
+        this.recalculatePercents();
+        this.Stage.printRuler();
+        return value;
+      } else {
+        return this.options.maxValue;
+      }
     }
 
     return value;
   }
 
+  calculateValueDiff() {
+    this.settings.valueDiff = this.options.maxValue - this.options.minValue;
+  }
+
   calculatePercent(num) {
     let correctValue = this.filterValue(num);
     return Math.round((correctValue - this.options.minValue) / this.settings.valueDiff * 100) || 1;
+  }
+
+  recalculatePercents() {
+    this.data = this.data.map(statData => {
+      return statData.map(data => {
+        data.value = this.calculatePercent(data.defValue);
+        return data;
+      });
+    });
   }
 
   transformChartDataToPercent(values) {
@@ -263,10 +285,7 @@ class RealTimeChart {
           numObject.value = this.calculatePercent(numObject.value);
           return numObject;
         } else if (typeof numObject === 'number') {
-          return {
-            value: this.calculatePercent(numObject),
-            defValue: numObject,
-          };
+          return { value: this.calculatePercent(numObject), defValue: numObject };
         }
       });
     }
