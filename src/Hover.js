@@ -31,17 +31,12 @@ class Hover {
 
   calculateSegmentKeyFromPosition() {
     let netXPosition = this.x;
-    if (this.Canvas.options.type === 'bar') {
-      netXPosition = netXPosition - this.Canvas.settings.borderWidth + 0.5;
-    } else if (this.Canvas.options.type === 'line') {
-      netXPosition = netXPosition - this.Canvas.settings.borderWidth + 0.5;
-    }
-
-    this.currentSegmentKey = Math.ceil(netXPosition / this.Canvas.settings.oneXSegment);
+    netXPosition = netXPosition - this.Canvas.settings.borderWidth;
+    this.currentSegmentKey = Math.floor(netXPosition / this.Canvas.settings.oneXSegment);
   }
 
   calculateDataBySegmentKey() {
-    this.currentData = this.Canvas.data[this.currentSegmentKey - 1] || false;
+    this.currentData = this.Canvas.data[this.currentSegmentKey] || false;
   }
 
   callHoverCallback() {

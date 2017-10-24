@@ -1,53 +1,16 @@
-## RealTimeChart
-High performant chart rendering on canvas.
-##### Fetures:
-* Meant to be fast, reduced CPU and memory usage
-* Rendering real time data
-* Responsive
-* Currently supports line and barchart
-* Hover callback
+#### Settings (private):
+* paddingBottom - padding from bottom
+* paddingRight - padding from right
+* borderWidth - border width
+* boxInnerPadding - space between border and the stage
+* stageWidth - net stage width, that could be used for drawing charts
+* stageHeight - net stage height
+* oneXSegment - one x segments width on the stage
+* oneYSegment - one y segment height
+* valueDiff - difference between the maxValue and the minValue
 
-![BarChart](https://i.imgur.com/i3zpHYp.png)
-![LineChart](https://i.imgur.com/tVjEmWe.png)
 
-### Example code
-##### Instance
-```js
-const rtChart = new RealTimeChart(document.getElementById('canvas'));
-```
-
-##### Set options
-```js
-rtChart.setOptions(optionsObject);
-```
-
-##### Feed the instance with data
-```js
-rtChart.addChartData(10);
-```
-```js
-rtChart.addChartData([10, 20, 30]);
-```
-```js
-rtChart.addChartData({id: 'uniqId', value: 10});
-```
-```js
-rtChart.addChartData([{id: 'uniqId1', value: 10}, {id: 'uniqId2', value: 20}, {id: 'uniqId3', value: 30}]);
-```
-
-##### Render
-
-```js
-rtChart.render();
-```
-
-##### Destroy
-
-```js
-rtChart.destroy();
-```
-
-##### Options (public):
+#### Options (public):
 * paddingBottom - extra padding from bottom
 ```js
 paddingBottom: 20, //Number
@@ -124,31 +87,7 @@ waitWindowLoad: true, //Boolean
 isResponsive: false, //Boolean
 ```
 
-* calcMaxValue - calculate the max value according to the input, new max value is increased by 10%. (newMaxValue = inputValue + inputValue * 0.1)
+* calcMaxValue - calculate the maxValue according to the input, it will increase the input value with 10%
 ```js
 calcMaxValue: false, //Boolean
 ```
-
-More examples are in the examples folder.
-
-### Build
-```bash
-npm run build
-```
-
-### Prettier src
-```bash
-npm run prettier
-```
-
-### Missing
-* tests
-* other type of charts
-* more examples
-* commenting the code
-
-### Contact
-- Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)
-
-### Version
-1.2.0

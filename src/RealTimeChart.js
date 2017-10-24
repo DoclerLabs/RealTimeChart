@@ -242,7 +242,7 @@ class RealTimeChart {
 
     if (value > this.options.maxValue) {
       if (this.options.calcMaxValue) {
-        this.options.maxValue = value + value * 0.1;
+        this.options.maxValue = value + (value * 0.1);
         this.calculateValueDiff();
         this.recalculatePercents();
         this.Stage.printRuler();
@@ -258,7 +258,7 @@ class RealTimeChart {
   calculateValueDiff() {
     this.settings.valueDiff = this.options.maxValue - this.options.minValue;
   }
-
+  
   calculatePercent(num) {
     let correctValue = this.filterValue(num);
     return Math.round((correctValue - this.options.minValue) / this.settings.valueDiff * 100) || 1;
@@ -276,7 +276,7 @@ class RealTimeChart {
   transformChartDataToPercent(values) {
     if (typeof values === 'number') {
       return this.transformChartDataToPercent([{ value: values }]);
-    } else if (typeof values === 'object' && values.value) {
+    } else if (typeof values === 'object' && typeof values.value === 'number') {
       return this.transformChartDataToPercent([values]);
     } else if (Array.isArray(values)) {
       return values.map(numObject => {
