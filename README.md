@@ -47,6 +47,12 @@ rtChart.render();
 rtChart.destroy();
 ```
 
+##### Recalculate bounds
+
+```js
+rtChart.recalculateBounds();
+```
+
 ##### Options (public):
 * paddingBottom - extra padding from bottom
 ```js
@@ -151,4 +157,4 @@ npm run prettier
 - Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)
 
 ### Version
-1.3.0
+1.4.0

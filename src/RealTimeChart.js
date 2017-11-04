@@ -93,7 +93,7 @@ class RealTimeChart {
   }
 
   /**
-   * If the window is loaded the promise resolves depending on waitWindowLoad option 
+   * If the window is loaded the promise resolves depending on waitWindowLoad option
    * @returns {Promise}
    */
   onLoad() {
@@ -134,6 +134,14 @@ class RealTimeChart {
    */
   createResizePlugin() {
     this.Resize = new Resize(this);
+  }
+  /**
+  * Force bound recalculation
+  */
+  recalculateBounds() {
+    if (this.Resize) {
+      this.Resize.setSize();
+    }
   }
 
   /**
@@ -242,7 +250,7 @@ class RealTimeChart {
 
     if (value > this.options.maxValue) {
       if (this.options.calcMaxValue) {
-        this.options.maxValue = value + (value * 0.1);
+        this.options.maxValue = value + value * 0.1;
         this.calculateValueDiff();
         this.recalculatePercents();
         this.Stage.printRuler();
@@ -258,7 +266,7 @@ class RealTimeChart {
   calculateValueDiff() {
     this.settings.valueDiff = this.options.maxValue - this.options.minValue;
   }
-  
+
   calculatePercent(num) {
     let correctValue = this.filterValue(num);
     return Math.round((correctValue - this.options.minValue) / this.settings.valueDiff * 100) || 1;
