@@ -4,10 +4,11 @@ High performant chart rendering on canvas.
 * Meant to be fast, reduced CPU and memory usage
 * Rendering real time data
 * Responsive
-* Currently supports line and barchart
+* Currently supports line, bar and stacked chart
 * Hover callback
 
 ![BarChart](https://i.imgur.com/i3zpHYp.png)
+![StackedBar](https://i.imgur.com/TXiIEMi.png)
 ![LineChart](https://i.imgur.com/tVjEmWe.png)
 
 ### Example code
@@ -113,7 +114,7 @@ totalElement: 20, //Number
 ```
 * type - type of the chart
 ```js
-type: 'line|bar', //Line or Bar chart
+type: 'line|bar|stacked', //Line, Bar or Stacked chart
 ```
 * onHover - callback for for hover status on the chart, returning the data for the hovered element
 ```js
@@ -130,7 +131,7 @@ waitWindowLoad: true, //Boolean
 isResponsive: false, //Boolean
 ```
 
-* calcMaxValue - calculate the max value according to the input, new max value is increased by 10%. (newMaxValue = inputValue + inputValue * 0.1)
+* calcMaxValue - calculate the max value according to the input, new max value is increased by 10%. (newMaxValue = inputValue + inputValue * 0.1). Stacked chart is currently not supported.
 ```js
 calcMaxValue: false, //Boolean
 ```
@@ -157,4 +158,4 @@ npm run prettier
 - Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)
 
 ### Version
-1.4.0
+1.5.0

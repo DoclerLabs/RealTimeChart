@@ -1,4 +1,5 @@
 import Bar from './Bar';
+import Stacked from './Stacked';
 import Line from './Line';
 import Stage from './Stage';
 import Hover from './Hover';
@@ -124,6 +125,7 @@ class RealTimeChart {
 
   createPlugins() {
     this.Bar = new Bar(this);
+    this.Stacked = new Stacked(this);
     this.Line = new Line(this);
     this.Stage = new Stage(this);
     this.Hover = new Hover(this);
@@ -170,7 +172,31 @@ class RealTimeChart {
       case 'bar':
         this.renderBar();
         break;
+      case 'stacked':
+        this.renderStacked();
+        break;
     }
+  }
+
+  renderStacked() {
+    this.data.forEach((value, segmentKey) => {
+      this.drawStacked(value, segmentKey);
+    });
+  }
+
+  drawStacked(values, segmentKey) {
+    let marginPercent = 0;
+    values.forEach((value, iterKey) => {
+      this.Stacked.setOptions({
+        segmentKey: segmentKey,
+        iterKey: iterKey,
+        percent: value.value,
+        marginPercent: marginPercent,
+        id: value.id,
+      });
+      marginPercent += value.value;
+      this.Stacked.draw();
+    });
   }
 
   renderBar() {
