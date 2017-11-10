@@ -161,7 +161,7 @@ npm run prettier
 1.5.0
 
 ### Usage
-Add this line top your package.json dependencies. Check the version you would like to use in your package. For available releases click  [here](https://github.com/DoclerLabs/RealTimeChart/releases). 
+Add this line to your **package.json** dependencies. Check the version you would like to use in your package. For available releases click  [here](https://github.com/DoclerLabs/RealTimeChart/releases). 
 ```js
 "realtimechart": "git+https://github.com/DoclerLabs/RealTimeChart.git#v1.5.0"
 ```
