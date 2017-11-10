@@ -1,4 +1,4 @@
-## RealTimeChart
+﻿## RealTimeChart
 High performant chart rendering on canvas.
 ##### Fetures:
 * Meant to be fast, reduced CPU and memory usage
@@ -8,7 +8,7 @@ High performant chart rendering on canvas.
 * Hover callback
 
 ![BarChart](https://i.imgur.com/i3zpHYp.png)
-![StackedBar](https://i.imgur.com/TXiIEMi.png)
+![StackedBar](https://i.imgur.com/zDJOMoz.png)
 ![LineChart](https://i.imgur.com/tVjEmWe.png)
 
 ### Example code
