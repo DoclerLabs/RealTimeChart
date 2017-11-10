@@ -138,8 +138,8 @@ class RealTimeChart {
     this.Resize = new Resize(this);
   }
   /**
-  * Force bound recalculation
-  */
+   * Force bound recalculation
+   */
   recalculateBounds() {
     if (this.Resize) {
       this.Resize.setSize();
