@@ -158,10 +158,26 @@ npm run prettier
 - Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)
 
 ### Version
-1.5.0
+1.6.0
 
 ### Usage
-Add this line to your **package.json** dependencies. Check the version you would like to use in your package. For available releases click  [here](https://github.com/DoclerLabs/RealTimeChart/releases). 
+
+#### Node
+From v1.6.0 Node is also supported. Add this line to your **package.json** dependencies. Check the version you would like to use in your package. For available releases click  [here](https://github.com/DoclerLabs/RealTimeChart/releases).
 ```js
 "realtimechart": "git+https://github.com/DoclerLabs/RealTimeChart.git#v1.5.0"
+```
+
+```js
+var RealTimeChart = require('realtimechart');
+```
+
+```js
+import RealTimeChart from 'realtimechart';
+```
+
+#### VanillaJS
+```html
+<script src="realtimechart.js" ></script>
+<script>console.log(window.RealTimeChart);</script>
 ```
