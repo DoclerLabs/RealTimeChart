@@ -318,6 +318,7 @@ class RealTimeChart {
         let chartData = {};
         if (typeof numObject === 'object') {
           chartDataHolder.push({
+            id: numObject.id || null,
             defValue: numObject.value,
             value: this.calculatePercent(numObject.value),
           });
