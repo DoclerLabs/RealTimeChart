@@ -315,7 +315,6 @@ class RealTimeChart {
     } else if (Array.isArray(values)) {
       let chartDataHolder = [];
       values.forEach(numObject => {
-        let chartData = {};
         if (typeof numObject === 'object') {
           chartDataHolder.push({
             id: numObject.id || null,
