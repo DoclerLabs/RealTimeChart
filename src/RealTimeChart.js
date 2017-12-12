@@ -313,15 +313,22 @@ class RealTimeChart {
     } else if (typeof values === 'object' && typeof values.value === 'number') {
       return this.transformChartDataToPercent([values]);
     } else if (Array.isArray(values)) {
-      return values.map(numObject => {
+      let chartDataHolder = [];
+      values.forEach(numObject => {
         if (typeof numObject === 'object') {
-          numObject.defValue = numObject.value;
-          numObject.value = this.calculatePercent(numObject.value);
-          return numObject;
+          chartDataHolder.push({
+            id: numObject.id || null,
+            defValue: numObject.value,
+            value: this.calculatePercent(numObject.value),
+          });
         } else if (typeof numObject === 'number') {
-          return { value: this.calculatePercent(numObject), defValue: numObject };
+          chartDataHolder.push({
+            value: this.calculatePercent(numObject),
+            defValue: numObject,
+          });
         }
       });
+      return chartDataHolder;
     }
   }
 }

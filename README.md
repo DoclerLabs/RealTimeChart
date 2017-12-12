@@ -158,7 +158,7 @@ npm run prettier
 - Gabriel Mičko on [Twitter](https://twitter.com/gabriel_micko), [GitHub](https://github.com/gabrielmicko)
 
 ### Version
-1.6.0
+1.6.1
 
 ### Usage
 

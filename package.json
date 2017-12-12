@@ -1,6 +1,6 @@
 {
   "name": "realtimechart",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "High performant chart for real time data.",
   "main": "export.js",
   "repository": {
